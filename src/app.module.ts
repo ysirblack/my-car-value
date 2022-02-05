@@ -14,6 +14,8 @@ import { Report } from './reports/report.entity';
       database: "db.sqlite",
       entities:[User,Report],
       synchronize: true,
+      //synchornize true makes your database table 
+      //to structure itself automatically when a new column is added
     }),
     UsersModule, ReportsModule],
   controllers: [AppController],
