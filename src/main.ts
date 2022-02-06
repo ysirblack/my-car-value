@@ -3,7 +3,9 @@ import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
+
   const app = await NestFactory.create(AppModule);
+  
   app.useGlobalPipes(//for DTOs
     new ValidationPipe({
       whitelist: true,//for a security reason, users can't submit
@@ -11,6 +13,7 @@ async function bootstrap() {
       //want these two.
     }),
   );
+
   await app.listen(3000);
 }
 bootstrap();
