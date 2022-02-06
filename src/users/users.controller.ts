@@ -2,11 +2,13 @@ import { Controller, Post , Body, Get, Param, Patch, Query, Delete, NotFoundExce
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
 import { UsersService } from './users.service';
-// import { SerializeInterceptor } from 'src/interceptors/serialize.interceptor';
+// import { SerializeInterceptor } from 'src/interceptors/serialize.interceptor'; was needed for v1 , not needed anymore
 import { UserDto } from './dtos/user.dto';
 import { Serialize } from 'src/interceptors/serialize.interceptor';
 
+
 @Controller('auth')
+@Serialize(UserDto)//v3 (applies to all controller methods if it is required so)
 export class UsersController {
   constructor(private userService: UsersService){}
 
@@ -16,11 +18,11 @@ export class UsersController {
     this.userService.create(body.email, body.password);
   }
 
-  //@UseInterceptors(new SerializeInterceptor(UserDto))
-  @Serialize(UserDto)
+  //@UseInterceptors(new SerializeInterceptor(UserDto)) v1 refactored to V2
+  //@Serialize(UserDto)v2 (just for this method)
   @Get("/:id")
   async findUser(@Param("id") id: string){
-    console.log("handler is running");
+    //console.log("handler is running"); it is just here to observe when this log will be shown
     const user =  await this.userService.findOne(parseInt(id));
     if(!user){
       throw new NotFoundException("user not found");
@@ -28,16 +30,19 @@ export class UsersController {
     return user;
   }
 
+  //@Serialize(customDto) 
   @Get()
   findAllUsers(@Query("email") email: string){
     return this.userService.find(email);
   }
 
+  //@Serialize(customDto2)
   @Delete("/:id")
   removeUser(@Param("id") id: string){
     return this.userService.remove(parseInt(id));
   }
 
+  //@Serialize(customDto3)
   @Patch("/:id")
   updateuser(@Param("id") id: string , @Body() body: UpdateUserDto){
     return this.userService.update(parseInt(id), body);
