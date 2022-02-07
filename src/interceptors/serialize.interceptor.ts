@@ -21,7 +21,7 @@ export class SerializeInterceptor implements NestInterceptor {
 
   intercept(context: ExecutionContext, handler: CallHandler): Observable<any>  {
     /*     // Run someting before a request is handled 
-    //by the request handler
+     /by the request handler
     console.log("running before the handler:", context);
     *///just here to observe when runs this snippet
 
