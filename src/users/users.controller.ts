@@ -29,6 +29,18 @@ export class UsersController {
   }
 
 
+  @Get("/whoami")
+  whoAmI(@Session() session: any){
+    return this.userService.findOne(session.userId);
+  }
+
+  @Post("/signout")
+  signout(@Session() session: any) {
+    session.userId = null;
+  }
+
+  
+
   //@UseInterceptors(new SerializeInterceptor(UserDto)) v1 refactored to V2
   //@Serialize(UserDto)v2 (just for this method)
   @Get("/:id")
