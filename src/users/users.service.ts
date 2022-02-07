@@ -14,7 +14,13 @@ export class UsersService {
   }
 
   findOne(id: number) {
+    
+    const user = this.repo.findOne(id);
+    if(!user){
+      throw new NotFoundException("no user found with that id ")
+    }
     return this.repo.findOne(id);
+    
   }
 
   find(email: string) {

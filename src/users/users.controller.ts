@@ -5,18 +5,26 @@ import { UsersService } from './users.service';
 // import { SerializeInterceptor } from 'src/interceptors/serialize.interceptor'; was needed for v1 , not needed anymore
 import { UserDto } from './dtos/user.dto';
 import { Serialize } from 'src/interceptors/serialize.interceptor';
-
+import { AuthService } from './auth.service';
 
 @Controller('auth')
 @Serialize(UserDto)//v3 (applies to all controller methods if it is required so)
 export class UsersController {
-  constructor(private userService: UsersService){}
+  constructor(private userService: UsersService, private authService: AuthService){}
 
 
   @Post("/signup")
   createUser(@Body() body: CreateUserDto){
-    this.userService.create(body.email, body.password);
+    //this.userService.create(body.email, body.password);
+    return this.authService.signup(body.email, body.password);
   }
+
+  @Post("/signin")
+  signin(@Body() body: CreateUserDto){//name may be inappropriate, but it's logic is appropriate
+
+    return this.authService.signin(body.email, body.password);
+  }
+
 
   //@UseInterceptors(new SerializeInterceptor(UserDto)) v1 refactored to V2
   //@Serialize(UserDto)v2 (just for this method)
