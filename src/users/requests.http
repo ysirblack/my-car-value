@@ -7,7 +7,7 @@ content-type: application/json
   "password": "12345"
 }
 
-### Create a new user
+### Sign in as an existing user
 POST http://localhost:3000/auth/signin
 content-type: application/json
 

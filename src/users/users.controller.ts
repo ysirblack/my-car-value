@@ -1,4 +1,4 @@
-import { Controller, Post , Body, Get, Param, Patch, Query, Delete, NotFoundException, UseInterceptors} from '@nestjs/common';
+import {Session, Controller, Post , Body, Get, Param, Patch, Query, Delete, NotFoundException, UseInterceptors} from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
 import { UsersService } from './users.service';
@@ -14,15 +14,18 @@ export class UsersController {
 
 
   @Post("/signup")
-  createUser(@Body() body: CreateUserDto){
+  async createUser(@Body() body: CreateUserDto, @Session() session: any){
     //this.userService.create(body.email, body.password);
-    return this.authService.signup(body.email, body.password);
+    const user = await this.authService.signup(body.email, body.password);
+    session.userId = user.id; //Session object will be in output header
+    return user;
   }
 
   @Post("/signin")
-  signin(@Body() body: CreateUserDto){//name may be inappropriate, but it's logic is appropriate
-
-    return this.authService.signin(body.email, body.password);
+  async signin(@Body() body: CreateUserDto,  @Session() session: any){//name may be inappropriate, but it's logic is appropriate
+    const user = await this.authService.signin(body.email, body.password);
+    session.userId = user.id//Session object will be in output header if it is changed
+    return user;
   }
 
 
