@@ -7,13 +7,13 @@ import { UserDto } from './dtos/user.dto';
 import { Serialize } from 'src/interceptors/serialize.interceptor';
 import { AuthService } from './auth.service';
 import { CurrentUser } from './decorators/current-user.decorator';
-import { CurrentUserInterceptor } from './interceptors/current-user.interceptor';
-
+//import { CurrentUserInterceptor } from './interceptors/current-user.interceptor'; V1-
+import { User } from './user.entity';
 
 
 @Controller('auth')
 @Serialize(UserDto)//v3 (applies to all controller methods if it is required so)
-@UseInterceptors(CurrentUserInterceptor)
+/* @UseInterceptors(CurrentUserInterceptor) *///V1- we are going to apply this interceptor GLOBBALY TO ALL CONTROLLERS
 export class UsersController {
   constructor(private userService: UsersService, private authService: AuthService){}
 
@@ -40,7 +40,7 @@ export class UsersController {
   }  */
 
   @Get("/whoami")
-  whoAmI(@CurrentUser() user: any){
+  whoAmI(@CurrentUser() user: User){
     return user;
   } 
 
