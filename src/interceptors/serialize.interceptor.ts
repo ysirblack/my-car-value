@@ -26,8 +26,9 @@ export class SerializeInterceptor implements NestInterceptor {
     *///just here to observe when runs this snippet
 
 
+    //handler is controllers routes functions,so we are telling nest.js keep going handle the route with this filter like
     return handler.handle().pipe(
-      //* @params data : is the data what it is sent or got from a user, to a user
+      //* @params data : is the data what it is sent to a user or got from a user, 
       map((data: any)=> {
         /*//Run something before the response is sent out
         console.log("running before response is sent out",data); *///just here to observe when runs this snippet
