@@ -21,9 +21,10 @@ describe('Authentication System', () => {
   });
 
   it('handles a signup request', () => {
-    const email = 'asdlkjq432@akl.com';
+    const email = 'test123@123.com';
 
     return request(app.getHttpServer())
+      //201 is status code ,
       .post('/auth/signup')
       .send({ email, password: 'alskdfjl' })
       .expect(201)

@@ -11,17 +11,18 @@ async function bootstrap() {
   //we could comment below and just execute newly created function here
   //todo setupApp(app);
 
-  app.use(cookieSession({
+ /*  app.use(cookieSession({
     keys: ["asdasdasd"]//set whatever you want, it will be used in the cookie for encryption
-  }));
-  app.useGlobalPipes(//for DTOs
+  })); */
+  /* app.useGlobalPipes(//for DTOs //moved to app.module! for e2e
     new ValidationPipe({
       whitelist: true,//for a security reason, users can't submit
       //another key value other than we set, like email and password.We just
       //want these two.
     }), 
-  );
+  );  */
 
   await app.listen(3000);
 }
+
 bootstrap();
