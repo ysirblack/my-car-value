@@ -1,4 +1,4 @@
-### Create a new user SHOULD BE SIGNED IN FIRST
+### Create a new report, SHOULD BE SIGNED IN FIRST
 POST http://localhost:3000/reports
 content-type: application/json
 
