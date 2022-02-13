@@ -1,4 +1,4 @@
-import {Param, Controller, Post, Get, Patch, Body, UseGuards } from '@nestjs/common';
+import {Query, Param, Controller, Post, Get, Patch, Body, UseGuards } from '@nestjs/common';
 import { CreateReportDto } from './dtos/create-report.dto';
 import { ReportsService } from './reports.service';
 import { AuthGuard } from 'src/guards/auth.guard';
@@ -8,7 +8,7 @@ import { Serialize } from 'src/interceptors/serialize.interceptor';
 import { ReportDto } from './dtos/report.dto';
 import { ApproveReportDto } from './dtos/approve-report.dto';
 import { AdminGuard } from 'src/guards/admin.guard';
-
+import { GetEstimateDto } from './dtos/get-estimate.dto';
 
 
 @Controller('reports')
@@ -24,7 +24,10 @@ export class ReportsController {
     return this.reportsService.create(body,user);
   }
 
- // @Get()
+  @Get()//when meaking a query, Query decorator gets them as a string! So dto will throw error!
+  getEstimate(@Query() query: GetEstimateDto){
+    console.log(query);
+  }
 
 
   @Patch("/:id")
