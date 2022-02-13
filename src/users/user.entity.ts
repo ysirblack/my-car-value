@@ -22,6 +22,9 @@ export class User {
     @Column()
     password: string
 
+    @Column({default: true})
+    admin: boolean;
+
     //one user will have many reports
     @OneToMany(()=> Report, (report) => report.user )//This callback function measn that, when javascript loads everything                  
     reports: Report[];                              //user.entity or report.entity will be compiled first and the other one

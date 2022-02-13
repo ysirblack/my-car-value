@@ -12,3 +12,10 @@ content-type: application/json
   "price": 500000
 }
 
+### change a report's approve property
+PATCH http://localhost:3000/reports/1
+content-type: application/json
+
+{
+  "approved": true
+}

@@ -14,8 +14,8 @@ export class CurrentUserInterceptor implements NestInterceptor {
 
   async intercept(context: ExecutionContext, handler: CallHandler) {
 
+    //If you put your logic before returnin the handler.handle, interceptor, intercept while request incoming,
     const request = context.switchToHttp().getRequest();
-    
     const { userId } = request.session || {};
 
     if(userId){
@@ -24,6 +24,7 @@ export class CurrentUserInterceptor implements NestInterceptor {
     }
 
     return handler.handle();//run the actual handler(means, controllers handler, keep going what you do)
-      
+      //but if you put your logic in return seciton, interceptor , intercept while just before returning our 
+      //response!
   }
 }

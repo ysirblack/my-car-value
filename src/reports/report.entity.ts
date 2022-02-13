@@ -8,6 +8,10 @@ export class Report {
   @PrimaryGeneratedColumn()
   id:number 
 
+
+  @Column({default: false})//when a user subimt their reports admin will approve it or reject it
+  approved: boolean;
+
   @Column()
   price: number;
 
