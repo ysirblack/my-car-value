@@ -4,13 +4,20 @@ import { UpdateUserDto } from './dtos/update-user.dto';
 import { UsersService } from './users.service';
 // import { SerializeInterceptor } from 'src/interceptors/serialize.interceptor'; was needed for v1 , not needed anymore
 import { UserDto } from './dtos/user.dto';
-/* import { Serialize } from './src/interceptors/serialize.interceptor'; */
-import { Serialize } from '../../src/interceptors/serialize.interceptor';
+
+//! FOR E2E TEST COMMENT THESE TWO!
+ import { Serialize } from 'src/interceptors/serialize.interceptor'; 
+import { AuthGuard } from 'src/guards/auth.guard';  
+//!FOR DEVELOPMENT COMMENT THESE TWO!
+/* import { Serialize } from '../../src/interceptors/serialize.interceptor';
+import { AuthGuard } from '../../src/guards/auth.guard';  */
+
 import { AuthService } from './auth.service';
 import { CurrentUser } from './decorators/current-user.decorator';
 //import { CurrentUserInterceptor } from './interceptors/current-user.interceptor'; V1-
 import { User } from './user.entity';
-import { AuthGuard } from '../../src/guards/auth.guard'; 
+
+
 
 @Controller('auth')
 @Serialize(UserDto)//v3 (applies to all controller methods if it is required so)

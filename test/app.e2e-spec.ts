@@ -3,6 +3,8 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
 
+//TODO for every new test delete test.sqlite file!
+
 describe('AppController (e2e)', () => {
   let app: INestApplication;
 
